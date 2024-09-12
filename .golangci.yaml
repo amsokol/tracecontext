@@ -1,0 +1,12 @@
+linters-settings:
+  depguard:
+    rules:
+      main:
+        allow:
+          - errors
+          - fmt
+          - regexp
+          - strings
+          - testing
+          - github.com/google/uuid
+          - github.com/amsokol/tracecontext/traceparent
