@@ -8,5 +8,7 @@ linters-settings:
           - regexp
           - strings
           - testing
+          - encoding/hex
           - github.com/google/uuid
           - github.com/amsokol/tracecontext/traceparent
+          - go.opentelemetry.io/otel/trace
