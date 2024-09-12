@@ -1,4 +1,4 @@
-package traceparent
+package marshaler
 
 import (
 	"encoding/hex"
