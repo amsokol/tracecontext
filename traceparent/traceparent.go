@@ -62,8 +62,12 @@ func (tp *Traceparent) WithNewParentID(parentID string) (Traceparent, error) {
 	}, nil
 }
 
-// New creates a new Traceparent with a generated traceID.
-func New() (Traceparent, error) {
+// New creates a new Traceparent with a generated traceID and with the provided parentID.
+func New(parentID string) (Traceparent, error) {
+	if !reSpanID.MatchString(parentID) {
+		return Traceparent{}, fmt.Errorf("%w: %s", errSpanIDInvalidFormat, parentID)
+	}
+
 	traceID, err := newTraceID()
 	if err != nil {
 		return Traceparent{}, fmt.Errorf("failed to generate traceID: %w", err)
@@ -72,7 +76,7 @@ func New() (Traceparent, error) {
 	return Traceparent{
 		version:  TraceparentVersion,
 		traceID:  traceID,
-		parentID: TraceparentInvalidParentID,
+		parentID: parentID,
 		flags:    TraceparentFlag,
 	}, nil
 }
