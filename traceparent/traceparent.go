@@ -44,7 +44,7 @@ type Traceparent struct {
 }
 
 // Serialize converts the Traceparent struct to a string.
-func (tp *Traceparent) Serialize() string {
+func (tp *Traceparent) String() string {
 	return fmt.Sprintf("%s-%s-%s-%s", tp.version, tp.traceID, tp.parentID, tp.flags)
 }
 
@@ -87,8 +87,8 @@ func newTraceID() (string, error) {
 	return strings.ReplaceAll(uuid.String(), "-", ""), nil
 }
 
-// Deserialize parses a traceparent string and returns a Traceparent struct.
-func Deserialize(str string) (Traceparent, error) {
+// FromString parses a traceparent string and returns a Traceparent struct.
+func FromString(str string) (Traceparent, error) {
 	var tpt Traceparent
 
 	n, err := fmt.Sscanf(str, "%2s-%32s-%16s-%2s", &tpt.version, &tpt.traceID, &tpt.parentID, &tpt.flags)
