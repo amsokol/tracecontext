@@ -1,4 +1,4 @@
-package marshaler
+package tracecontext
 
 import (
 	"encoding/hex"
