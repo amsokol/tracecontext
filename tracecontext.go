@@ -29,12 +29,12 @@ var (
 	errTraceparentInvalidVersion = errors.New("invalid traceparent version")
 )
 
-func MarshalSpanContext(sc trace.SpanContext) string {
+func Marshal(sc trace.SpanContext) string {
 	return fmt.Sprintf("%s-%s-%s-%s",
 		traceparentVersion, sc.TraceID().String(), sc.SpanID().String(), sc.TraceFlags().String())
 }
 
-func UnmarshalSpanContext(traceparent, tracestate string) (trace.SpanContextConfig, error) {
+func Unmarshal(traceparent, tracestate string) (trace.SpanContextConfig, error) {
 	var version, traceID, parentID, flags string
 
 	if n, err := fmt.Sscanf(traceparent, "%2s-%32s-%16s-%2s", &version, &traceID, &parentID, &flags); err != nil {
